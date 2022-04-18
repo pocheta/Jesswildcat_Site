@@ -1,0 +1,49 @@
+{
+  "marker": [
+    {
+      "name": "za",
+      "description": "za",
+      "lieu": "az",
+      "image": "487192.png",
+      "icon": "marker3.png",
+      "latitude": 47.23150566673945,
+      "longitude": 1.4999999999999902
+    },
+    {
+      "name": "coucou",
+      "description": "bon,jour",
+      "lieu": "test",
+      "image": "Capture%20d%E2%80%99%C3%A9cran%202021-10-25%20233913.png",
+      "icon": "marker2.png",
+      "latitude": 42.31089868144744,
+      "longitude": 80.625
+    },
+    {
+      "name": "coucou",
+      "description": "bon,jour",
+      "lieu": "test",
+      "image": "Capture%20d%E2%80%99%C3%A9cran%202021-10-25%20233913.png",
+      "icon": "marker1.png",
+      "latitude": 42.31089868144744,
+      "longitude": 80.625
+    },
+    {
+      "name": "test",
+      "description": "azezaeaz eea  az eazaeaaz eza",
+      "lieu": "ezaezaaze",
+      "image": "Capture.png",
+      "icon": "marker2.png",
+      "latitude": 40.62507133239771,
+      "longitude": -2.2500000000000187
+    },
+    {
+      "name": "trzaazazaz",
+      "description": "zeeze",
+      "lieu": "zaeaze",
+      "image": "487192.png",
+      "icon": "marker1.png",
+      "latitude": 35.76553208557428,
+      "longitude": -100.31250000000001
+    }
+  ]
+}
