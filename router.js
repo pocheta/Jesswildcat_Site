@@ -9,7 +9,7 @@ function route(routes, pathname, response, postData) {
 
   if ( 'function' === typeof routes[pathname] ) {
     routes[pathname](response, postData);
-  } else if ( 'css' === extension || 'js' === extension || 'png' === extension ) {
+  } else if ( 'css' === extension || 'js' === extension || 'png' === extension || 'jpg' === extension || 'jpeg' === extension) {
     routes._static(response, pathname, postData);
   } else {
     respondWithHTTPCode(response, 404);

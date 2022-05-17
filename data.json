@@ -1,49 +1,76 @@
 {
   "marker": [
     {
-      "name": "za",
-      "description": "za",
-      "lieu": "az",
+      "name": "test1",
+      "description": "test1",
+      "lieu": "test1",
       "image": "487192.png",
-      "icon": "marker3.png",
-      "latitude": 47.23150566673945,
-      "longitude": 1.4999999999999902
+      "latitude": 50.627533555118134,
+      "longitude": 3.062697630680413
     },
     {
-      "name": "coucou",
-      "description": "bon,jour",
-      "lieu": "test",
+      "name": "test2",
+      "description": "test2",
+      "lieu": "test2",
       "image": "Capture%20d%E2%80%99%C3%A9cran%202021-10-25%20233913.png",
-      "icon": "marker2.png",
-      "latitude": 42.31089868144744,
-      "longitude": 80.625
+      "latitude": 50.618677084133,
+      "longitude": 3.070089408328964
     },
     {
-      "name": "coucou",
-      "description": "bon,jour",
-      "lieu": "test",
+      "name": "test3",
+      "description": "test3",
+      "lieu": "test3",
+      "image": "Capture%20d%E2%80%99%C3%A9cran%202022-01-29%20121842.png",
+      "latitude": 50.62774862774995,
+      "longitude": 3.0635309289125217
+    },
+    {
+      "name": "test4",
+      "description": "test4",
+      "lieu": "test4",
+      "image": "487192.png",
+      "latitude": 38.98726727158251,
+      "longitude": -1.877768789839421
+    },
+    {
+      "name": "test5",
+      "description": "test5",
+      "lieu": "test5",
+      "image": "487192.png",
+      "latitude": 39.05413248592927,
+      "longitude": -1.9508256350670237
+    },
+    {
+      "name": "test6",
+      "description": "test5",
+      "lieu": "test5",
+      "image": "487192.png",
+      "latitude": 38.8947864210665,
+      "longitude": -1.7032397543519058
+    },
+    {
+      "name": "test6",
+      "description": "test6",
+      "lieu": "test6",
       "image": "Capture%20d%E2%80%99%C3%A9cran%202021-10-25%20233913.png",
-      "icon": "marker1.png",
-      "latitude": 42.31089868144744,
-      "longitude": 80.625
+      "latitude": 39.00168466181111,
+      "longitude": -1.8407943201003996
+    },
+    {
+      "name": "test6",
+      "description": "test6",
+      "lieu": "test6",
+      "image": "487192.png",
+      "latitude": 38.94717687358258,
+      "longitude": -1.8790889159228152
     },
     {
       "name": "test",
-      "description": "azezaeaz eea  az eazaeaaz eza",
-      "lieu": "ezaezaaze",
-      "image": "Capture.png",
-      "icon": "marker2.png",
-      "latitude": 40.62507133239771,
-      "longitude": -2.2500000000000187
-    },
-    {
-      "name": "trzaazazaz",
-      "description": "zeeze",
-      "lieu": "zaeaze",
-      "image": "487192.png",
-      "icon": "marker1.png",
-      "latitude": 35.76553208557428,
-      "longitude": -100.31250000000001
+      "description": "tetest",
+      "lieu": "test",
+      "image": "1.jpg",
+      "latitude": 50.60753293860799,
+      "longitude": 3.029750130971348
     }
   ]
 }

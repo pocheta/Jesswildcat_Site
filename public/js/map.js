@@ -1,6 +1,7 @@
 let map;
 let click = false;
 let hoverMarker = false;
+let clusterHoverMarker = false;
 let clickCoordinateLatitude;
 let clickCoordinateLongitude;
 var fileobj;
@@ -46,7 +47,7 @@ function initMap() {
 
   // Onclick de la map
   map.on("click", function (event) {
-    if (!hoverMarker && !click) {
+    if (!hoverMarker && !clusterHoverMarker && !click) {
       click = true;
       document.getElementById("addPoint").style.display = "grid";
       clickCoordinateLongitude = ol.proj.transform(
@@ -72,21 +73,34 @@ function initMap() {
       }
     );
 
-    if (feature_onHover) {
-      hoverMarker = true;
-      var content = document.getElementById("popup-content");
-      overlay.setPosition(evt.coordinate);
-      content.innerHTML =
-        '<img src="assets/images/uploads/' +
-        feature_onHover.getProperties().image +
-        '"> <h3 class="text-lg mx-1 my-4 ">' +
-        feature_onHover.getProperties().name +
-        '</h3><p class="text-sm">' +
-        feature_onHover.getProperties().description +
-        "</p>";
-      container.style.display = "block";
+    if (feature_onHover != undefined) {
+      if (feature_onHover.get("features").length == 1) {
+        hoverMarker = true;
+        var content = document.getElementById("popup-content");
+        overlay.setPosition(evt.coordinate);
+        content.innerHTML =
+          '<img src="assets/images/uploads/' +
+          feature_onHover.get("features")[0].getProperties().image +
+          '"> <h3 class="text-lg mx-1 my-4 ">' +
+          feature_onHover.get("features")[0].getProperties().name +
+          '</h3><p class="text-sm">' +
+          feature_onHover.get("features")[0].getProperties().description +
+          "</p>";
+        container.style.display = "block";
+      } else {
+        clusterHoverMarker = true;
+        var content = document.getElementById("popup-content");
+        overlay.setPosition(evt.coordinate);
+        content.innerHTML = "<ul>";
+        feature_onHover.get("features").forEach((element) => {
+          content.innerHTML += "<li>" + element.getProperties().name + "</li>";
+        });
+        content.innerHTML += "</ul>";
+        container.style.display = "block";
+      }
     } else {
       hoverMarker = false;
+      clusterHoverMarker = false;
       container.style.display = "none";
     }
 
@@ -94,21 +108,25 @@ function initMap() {
       if (hoverMarker) {
         document.getElementById("info").style.display = "flex";
         document.getElementById("parent").classList.add("w-10/12");
-        document.getElementById("titreInfo").innerText =
-          feature_onHover.getProperties().name;
-        document.getElementById("descriptionInfo").innerText =
-          feature_onHover.getProperties().description;
-        document.getElementById("lieuInfo").innerText =
-          feature_onHover.getProperties().lieu;
+        document.getElementById("titreInfo").innerText = feature_onHover
+          .get("features")[0]
+          .getProperties().name;
+        document.getElementById("descriptionInfo").innerText = feature_onHover
+          .get("features")[0]
+          .getProperties().description;
+        document.getElementById("lieuInfo").innerText = feature_onHover
+          .get("features")[0]
+          .getProperties().lieu;
         document.getElementById("imageInfo").src =
-          "assets/images/uploads/" + feature_onHover.getProperties().image;
+          "assets/images/uploads/" +
+          feature_onHover.get("features")[0].getProperties().image;
 
-        var ext = feature_onHover.getGeometry().getExtent();
+        var ext = feature_onHover.get("features")[0].getGeometry().getExtent();
         var center = ol.extent.getCenter(ext);
         map.setView(
           new ol.View({
             center: [center[0], center[1]],
-            zoom: 15,
+            zoom: 18,
           })
         );
 
@@ -129,6 +147,18 @@ function initMap() {
         span.onclick = function () {
           modal.style.display = "none";
         };
+      }
+
+      if (clusterHoverMarker) {
+        var center = ol.extent.getCenter(
+          feature_onHover.getGeometry().getExtent()
+        );
+        map.setView(
+          new ol.View({
+            center: [center[0], center[1]],
+            zoom: 14,
+          })
+        );
       }
     });
   });
@@ -177,7 +207,6 @@ function initPoint() {
 
       for (let index = 0; index < responseJSON.marker.length; index++) {
         const element = responseJSON.marker[index];
-        console.log(element);
 
         var iconFeature = new ol.Feature({
           geometry: new ol.geom.Point(
@@ -185,14 +214,6 @@ function initPoint() {
           ),
         });
 
-        var iconStyle = new ol.style.Style({
-          image: new ol.style.Icon({
-            anchor: [0.5, 1],
-            scale: 0.1,
-            src: "../assets/images/marker/" + element.icon,
-          }),
-        });
-        iconFeature.setStyle(iconStyle);
         iconFeature.setProperties({
           name: element.name,
           lieu: element.lieu,
@@ -205,10 +226,60 @@ function initPoint() {
       var vectorSource = new ol.source.Vector({
         features: features,
       });
-      var vectorLayer = new ol.layer.Vector({
+
+      var clusterSource = new ol.source.Cluster({
+        distance: 40,
         source: vectorSource,
       });
-      map.addLayer(vectorLayer);
+
+      var styleCache = {};
+      var clusters = new ol.layer.Vector({
+        source: clusterSource,
+        style: function (feature, resolution) {
+          var size = feature.get("features").length;
+          var style = styleCache[size];
+          if (size == 1) {
+            style = [
+              new ol.style.Style({
+                image: new ol.style.Icon({
+                  anchor: [0.5, 1],
+                  scale: 0.05,
+                  src: "../assets/images/marker/multiple_marker.png",
+                }),
+              }),
+            ];
+            styleCache[size] = style;
+          } else {
+            if (!style) {
+              console.log(feature.get("features"));
+              style = [
+                new ol.style.Style({
+                  image: new ol.style.Icon({
+                    anchor: [0.5, 1],
+                    scale: 0.1,
+                    src: "../assets/images/marker/single_marker.png",
+                  }),
+                  text: new ol.style.Text({
+                    text: size.toString(),
+                    scale: 1.3,
+                    fill: new ol.style.Fill({
+                      color: "#FFFF",
+                    }),
+                    stroke: new ol.style.Stroke({
+                      color: "#00000",
+                      width: 3.5,
+                    }),
+                  }),
+                }),
+              ];
+              styleCache[size] = style;
+            }
+          }
+          return style;
+        },
+      });
+
+      map.addLayer(clusters);
     }
   };
 }
@@ -217,7 +288,6 @@ function initPoint() {
 function addLieu() {
   var nom = document.getElementById("nom").value;
   var lieu = document.getElementById("lieu").value;
-  var icon = document.getElementById("defaultMarker").src;
   var description = document.getElementById("description").value;
   var image = document.getElementsByClassName("file");
   var imageName = [];
@@ -239,7 +309,7 @@ function addLieu() {
       image: new ol.style.Icon({
         anchor: [0.5, 1],
         scale: 0.1,
-        src: icon,
+        src: "../assets/images/marker/single_marker.png",
       }),
     });
 
@@ -256,10 +326,59 @@ function addLieu() {
       features: features,
     });
 
-    var vectorLayer = new ol.layer.Vector({
+    var clusterSource = new ol.source.Cluster({
+      distance: 40,
       source: vectorSource,
     });
-    map.addLayer(vectorLayer);
+
+    var styleCache = {};
+    var clusters = new ol.layer.Vector({
+      source: clusterSource,
+      style: function (feature, resolution) {
+        var size = feature.get("features").length;
+        var style = styleCache[size];
+        if (size == 1) {
+          style = [
+            new ol.style.Style({
+              image: new ol.style.Icon({
+                anchor: [0.5, 1],
+                scale: 0.05,
+                src: "../assets/images/marker/multiple_marker.png",
+              }),
+            }),
+          ];
+          styleCache[size] = style;
+        } else {
+          if (!style) {
+            console.log(feature.get("features"));
+            style = [
+              new ol.style.Style({
+                image: new ol.style.Icon({
+                  anchor: [0.5, 1],
+                  scale: 0.1,
+                  src: "../assets/images/marker/single_marker.png",
+                }),
+                text: new ol.style.Text({
+                  text: size.toString(),
+                  scale: 1.3,
+                  fill: new ol.style.Fill({
+                    color: "#FFFF",
+                  }),
+                  stroke: new ol.style.Stroke({
+                    color: "#00000",
+                    width: 3.5,
+                  }),
+                }),
+              }),
+            ];
+            styleCache[size] = style;
+          }
+        }
+        return style;
+      },
+    });
+
+    map.addLayer(clusters);
 
     click = false;
     document.getElementById("addPoint").style.display = "none";
@@ -269,7 +388,6 @@ function addLieu() {
       description: description,
       lieu: lieu,
       image: imageName[0],
-      icon: icon.split("/")[icon.split("/").length - 1],
       longitude: clickCoordinateLongitude,
       latitude: clickCoordinateLatitude,
     };

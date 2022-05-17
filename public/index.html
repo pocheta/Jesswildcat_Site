@@ -29,7 +29,6 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
-    <script src="js/iconeselect.js"></script>
 
     <title>Antoine POCHET</title>
   </head>
@@ -45,7 +44,7 @@
 
       <div
         id="addPoint"
-        class="hidden max-w-screen-xl pt-24 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg"
+        class="hidden max-w-screen-xl px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg"
       >
         <div>
           <div>
@@ -59,7 +58,31 @@
               placeholder="Nom"
             />
           </div>
+          
           <div class="mt-8">
+            <span
+              id="textDescription"
+              class="uppercase text-sm text-gray-600 font-bold"
+              >Description</span
+            >
+            <textarea
+              id="description"
+              class="w-full h-60 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              placeholder="Description"
+            ></textarea>
+          </div>
+          
+          <div class="mt-8">
+            <button
+              onclick="addLieu()"
+              class="uppercase text-sm font-bold tracking-wide bg-lime-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-lime-400"
+            >
+              Ajouter le lieu
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="mb-8">
             <span
               id="textLieu"
               class="uppercase text-sm text-gray-600 font-bold"
@@ -73,139 +96,20 @@
             />
           </div>
 
-          <div class="mt-8">
-            <span
-              id="textDescription"
-              class="uppercase text-sm text-gray-600 font-bold"
-              >Description</span
-            >
-            <textarea
-              id="description"
-              class="w-full h-44 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-              placeholder="Description"
-            ></textarea>
-          </div>
-
-          <div class="mt-8">
-            <button
-              onclick="addLieu()"
-              class="uppercase text-sm font-bold tracking-wide bg-lime-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-lime-400"
-            >
-              Ajouter le lieu
-            </button>
-          </div>
-        </div>
-        <div>
           <div>
             <span
               id="textImage"
               class="uppercase text-sm text-gray-600 font-bold"
               >Image</span
             >
-            <div class="dropzone" id="dropzone">
+            <div class="dropzone mt-2" id="dropzone">
               <span>Drop the files here...</span>
             </div>
             <input type="file" id="addFile" multiple />
           </div>
           <div class="img-content"></div>
 
-          <div class="mt-8">
-            <span class="uppercase text-sm text-gray-600 font-bold">Icone</span>
-
-            <div
-              x-data="{ open: false }"
-              class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-            >
-              <div
-                @click="open = !open"
-                class="relative border-b-4 border-transparent py-3"
-                :class="{'border-indigo-700 transform transition duration-300 ': open}"
-                x-transition:enter-end="transform opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-75"
-                x-transition:leave-start="transform opacity-100 scale-100"
-              >
-                <div
-                  class="flex justify-center items-center space-x-3 cursor-pointer"
-                >
-                  <div
-                    class="font-semibold dark:text-white text-gray-900 text-lg"
-                  >
-                    <div class="cursor-pointer">
-                      <img
-                        id="defaultMarker"
-                        src="./assets/images/marker/marker1.png"
-                        alt="m1"
-                        class="w-12 h-12 object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div
-                  x-show="open"
-                  x-transition:enter="transition ease-out duration-100"
-                  x-transition:enter-start="transform opacity-0 scale-95"
-                  x-transition:enter-end="transform opacity-100 scale-100"
-                  x-transition:leave="transition ease-in duration-75"
-                  x-transition:leave-start="transform opacity-100 scale-100"
-                  x-transition:leave-end="transform opacity-0 scale-95"
-                  class="absolute w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5"
-                >
-                  <ul class="space-y-3 dark:text-white">
-                    <li id="Marker1" class="font-medium">
-                      <a
-                        onclick="setmarker('Marker1')"
-                        href="#"
-                        class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
-                      >
-                        <div class="mr-3">
-                          <img
-                            src="assets/images/marker/marker1.png"
-                            alt=""
-                            class="w-12 h-12 object-cover"
-                          />
-                        </div>
-                        Marker1
-                      </a>
-                    </li>
-                    <li id="Marker2" class="font-medium">
-                      <a
-                        onclick="setmarker('Marker2')"
-                        href="#"
-                        class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
-                      >
-                        <div class="mr-3">
-                          <img
-                            src="assets/images/marker/marker2.png"
-                            alt=""
-                            class="w-12 h-12 object-cover"
-                          />
-                        </div>
-                        Marker2
-                      </a>
-                    </li>
-                    <li id="Marker3" class="font-medium">
-                      <a
-                        onclick="setmarker('Marker3')"
-                        href="#"
-                        class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
-                      >
-                        <div class="mr-3">
-                          <img
-                            src="assets/images/marker/marker3.png"
-                            alt=""
-                            class="w-12 h-12 object-cover"
-                          />
-                        </div>
-                        Marker3
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-10">
+          <div class="mt-9">
             <button
               onclick="cancelLieu()"
               class="uppercase text-sm font-bold tracking-wide bg-red-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-red-400"

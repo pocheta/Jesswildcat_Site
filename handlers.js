@@ -77,7 +77,7 @@ function writeJSON(response, postData) {
 
   let file = editJsonFile("data.json");
 
-  file.append("marker", {name : fileReceveid.name, description: fileReceveid.description, lieu: fileReceveid.lieu, image: fileReceveid.image, icon: fileReceveid.icon, latitude: fileReceveid.latitude, longitude: fileReceveid.longitude});
+  file.append("marker", {name : fileReceveid.name, description: fileReceveid.description, lieu: fileReceveid.lieu, image: fileReceveid.image, latitude: fileReceveid.latitude, longitude: fileReceveid.longitude});
 
   file.save();
 }
