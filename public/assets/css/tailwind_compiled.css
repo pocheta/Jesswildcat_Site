@@ -4396,12 +4396,12 @@ textarea.form-control.is-invalid {
   left: 0px;
 }
 
-.right-4 {
-  right: 1rem;
-}
-
 .right-36 {
   right: 9rem;
+}
+
+.right-4 {
+  right: 1rem;
 }
 
 .bottom-\[60px\] {
@@ -4440,6 +4440,10 @@ textarea.form-control.is-invalid {
   margin: 1.5rem;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -4448,6 +4452,16 @@ textarea.form-control.is-invalid {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-24 {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .my-10 {
@@ -4504,12 +4518,8 @@ textarea.form-control.is-invalid {
   margin-bottom: 1rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.mt-9 {
-  margin-top: 2.25rem;
+.mt-6 {
+  margin-top: 1.5rem;
 }
 
 .mt-5 {
@@ -4518,6 +4528,14 @@ textarea.form-control.is-invalid {
 
 .ml-6 {
   margin-left: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mt-9 {
+  margin-top: 2.25rem;
 }
 
 .mb-2 {
@@ -4592,6 +4610,12 @@ textarea.form-control.is-invalid {
   height: 14rem;
 }
 
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .h-60 {
   height: 15rem;
 }
@@ -4646,6 +4670,12 @@ textarea.form-control.is-invalid {
 
 .w-full {
   width: 100%;
+}
+
+.w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .w-2\/4 {
@@ -5434,8 +5464,13 @@ body {
 }
 
 #info {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  border-radius : 16px;
+  border : 2px solid #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* border-radius : 16px 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(32, 32, 32, 0.3) -10px 10px, rgba(66, 66, 66, 0.2) -15px 15px, rgba(80, 80, 80, 0.1) -20px 20px, rgba(146, 146, 146, 0.05) -25px 25px; */
 }
 
 #addPoint {
@@ -5613,6 +5648,14 @@ input[type="file"] {
   height: 150px;
 }
 
+figcaption {
+  background-color: #222;
+  color: #fff;
+  font: italic smaller sans-serif;
+  padding: 3px;
+  text-align: center;
+}
+
 /* Add Animation - Zoom in the Modal */
 
 .modal-content, #caption {
@@ -5748,6 +5791,10 @@ input[type="file"] {
 .cross:after{
   transform:rotate(-45deg);
   right:2px;
+}
+
+.bg-white-opacity-90{
+  background-color:rgba(255, 255, 255, 0.9);
 }
 
 .hover\:-translate-y-2:hover {

@@ -106,7 +106,8 @@ function initMap() {
 
     map.on("click", function (event) {
       if (hoverMarker) {
-        document.getElementById("info").style.display = "block";
+        document.getElementById("info").style.display = "flex";
+        document.getElementById("parent").classList.add("w-10/12");
         document.getElementById("titreInfo").innerText = feature_onHover
           .get("features")[0]
           .getProperties().name;

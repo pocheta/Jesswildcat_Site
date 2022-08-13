@@ -29,31 +29,77 @@
 
 <body id="body" onload="initMap()" class="flex">
   <div id="parent">
-    <!-- Map global -->
     <div id="map"></div>
 
-    <!-- Popup de l'oeuvre -->
     <div id="popup" class="ol-popup">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
       <div id="popup-content" class="break-normal"></div>
     </div>
 
-    <!-- Information de l'oeuvre -->
-    <div id="info" class="hidden w-3/5 bg-white-opacity-90 mx-auto inset-0 my-24">
-      <div class="flex flex-col	">
-        <div class="absolute right-0">
-          <a onclick="closeInfo()">
-            <div class="cross mt-6 mr-6"></div>
-          </a>
+    <div id="addPoint"
+      class="hidden max-w-screen-xl px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+      <div>
+        <div>
+          <span id="textNom" class="uppercase text-sm text-gray-600 font-bold">Nom</span>
+          <input id="nom"
+            class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="text" placeholder="Nom" />
         </div>
-        <div class="mx-16 mt-16">
-          <div class="w-fit h-fit transition-shadow duration-300 hover:shadow-xl m-auto">
-            <figure>
-              <img id="imageInfo" class="object-cover w-fit h-fit rounded shadow-lg" style="max-height: 28rem" src=""
-                alt="" />
-              <figcaption id="lieuInfo">Lieu</figcaption>
-            </figure>
+
+        <div class="mt-8">
+          <span id="textDescription" class="uppercase text-sm text-gray-600 font-bold">Description</span>
+          <textarea id="description"
+            class="w-full h-60 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            placeholder="Description"></textarea>
+        </div>
+
+        <div class="mt-8">
+          <button onclick="addLieu()"
+            class="uppercase text-sm font-bold tracking-wide bg-lime-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-lime-400">
+            Ajouter le lieu
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="mb-8">
+          <span id="textLieu" class="uppercase text-sm text-gray-600 font-bold">Lieu</span>
+          <input id="lieu"
+            class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="text" placeholder="Lieu" />
+        </div>
+
+        <div>
+          <span id="textImage" class="uppercase text-sm text-gray-600 font-bold">Image</span>
+          <div class="dropzone mt-2" id="dropzone">
+            <span>Drop the files here...</span>
           </div>
+          <input type="file" id="addFile" multiple />
+        </div>
+        <div class="img-content"></div>
+
+        <div class="mt-9">
+          <button onclick="cancelLieu()"
+            class="uppercase text-sm font-bold tracking-wide bg-red-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-red-400">
+            Annuler l'ajout du lieu
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="info" class="hidden px-4 pb-16 pt-4 w-2/4 md:px-24 lg:px-8 lg:pb-20 bg-white flex-col">
+      <div class="mx-auto lg:max-w-2xl">
+        <a onclick="closeInfo()">
+          <svg class="right-4 relative" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="6%" height="6%"
+            viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879" xml:space="preserve">
+            <g>
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="#FF4141"
+                d="M61.44,0c33.933,0,61.439,27.507,61.439,61.439 s-27.506,61.439-61.439,61.439C27.507,122.879,0,95.372,0,61.439S27.507,0,61.44,0L61.44,0z M73.451,39.151 c2.75-2.793,7.221-2.805,9.986-0.027c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.076,12.249 c2.729,2.77,2.689,7.257-0.08,10.022c-2.773,2.765-7.23,2.758-9.955-0.013L61.446,71.54L49.428,83.728 c-2.75,2.793-7.22,2.805-9.986,0.027c-2.763-2.776-2.776-7.293-0.027-10.084L51.48,61.434L39.403,49.185 c-2.728-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.953,0.013l11.997,12.165L73.451,39.151L73.451,39.151z" />
+            </g>
+          </svg>
+        </a>
+        <div class="relative w-full transition-shadow duration-300 hover:shadow-xl">
+          <img id="imageInfo" class="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96 mt-10" src=""
+            alt="" />
         </div>
       </div>
       <div class="max-w-xl my-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
@@ -65,16 +111,17 @@
           Description
         </p>
       </div>
-      <!--<div class="mx-16">
+      <div>
         <hr class="mt-5 border-gray-300" />
         <div class="flex items-center space-x-4">
           <p id="lieuInfo" class="mb-6 text-gray-900">Lieu</p>
-        </div>-->
+        </div>
+      </div>
     </div>
   </div>
-  </div>
 
-  <!-- Modal de l'image -->
+
+  <!-- The Modal -->
   <div id="imageModal" class="modal">
     <!-- The Close Button -->
     <span class="close">&times;</span>
@@ -86,7 +133,6 @@
     <div id="caption"></div>
   </div>
 
-  <!-- Menu du site -->
   <div class="flex justify-end right-2 bottom-0 fixed">
     <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
       class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
@@ -147,7 +193,6 @@
     </div>
   </div>
 
-  <!-- Bouton de la légende -->
   <div class="flex justify-end right-36 bottom-0 fixed">
     <button onclick="showLegende()"
       class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
@@ -157,13 +202,12 @@
     </button>
   </div>
 
-  <!-- La légende -->
   <div id="legende" class="sm:text-center bg-legende hidden">
     <div class="flex justify-center">
       <div class="absolute left-0 ml-6">
-        <button onclick="showLegende()">
-          <div class="cross"></div>
-        </button>
+      <button onclick="showLegende()">
+        <div class="cross"></div>
+      </button>
       </div>
       <p class="text-base  text-white md:text-xl">
         Légende :
