@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./assets/css/tailwind_compiled.css" />
+    <script src="./js/index.min.js"></script>
+    <script src="./js/flowbite.js"></script>
+
+
+    <title>Antoine POCHET</title>
+</head>
+
+<body class="bg-white">
+
+    <div class="bg-image"></div>
+    <button onclick="location.href='map'">
+        <div class="bg-text">
+            Découvrer la carte !
+        </div>
+    </button>
+
+    <div class="flex justify-end left-10 bottom-0 fixed flex-row-reverse">
+        <img class="w-3/12" src="assets/images/uploads/1.jpg">
+    </div>
+
+    <div class="sm:text-center bg-legende">
+        <p class="text-base text-white md:text-xl">
+            Légende :
+        </p>
+        <div
+            class="mt-4 flex flex-col justify-between p-8 transition-shadow duration-300 bg-white border rounded shadow-sm sm:items-center hover:shadow">
+            <div class="text-center">
+                <ul class="space-y-2 ">
+                    <li class="flex items-center justify-center">
+                        <div class="w-1/12 mr-6">
+                            <img src="assets/images/marker/single_marker.png">
+                        </div>
+                        <p class="font-medium text-gray-800">Chat</p>
+                    </li>
+                    <li class="flex items-center justify-center">
+                        <div class="w-1/12 mr-6">
+                            <img class=" h-full" src="assets/images/marker/multiple_marker.png">
+                        </div>
+                        <p class="font-medium text-gray-800">Pate de chat</p>
+                    </li>
+                    <li class="flex items-center justify-center">
+                        <div class="mr-2">
+                            <svg class="w-4 h-4 text-deep-purple-accent-400" viewBox="0 0 24 24"
+                                stroke-linecap="round" stroke-width="2">
+                                <polyline fill="none" stroke="currentColor" points="6,12 10,16 18,8"></polyline>
+                                <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
+                            </svg>
+                        </div>
+                        <p class="font-medium text-gray-800">Lille</p>
+                    </li>
+                    <li class="flex items-center justify-center">
+                        <div class="mr-2">
+                            <svg class="w-4 h-4 text-deep-purple-accent-400" viewBox="0 0 24 24"
+                                stroke-linecap="round" stroke-width="2">
+                                <polyline fill="none" stroke="currentColor" points="6,12 10,16 18,8"></polyline>
+                                <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
+                            </svg>
+                        </div>
+                        <p class="font-medium text-gray-800">Lille</p>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="flex justify-end right-2 bottom-0 fixed">
+        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
+            class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
+            type="button">
+            <span class="sr-only">Open menu</span>
+            <img class="w-16 h-16 self-center" src="assets/images/site.png">
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdownAvatar"
+            class="z-10 w-52 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
+            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(3000px, 62px);">
+            <div class="py-1 text-sm text-gray-900 dark:text-white">
+                <button
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                    onclick="location.href='home'">
+                    <img class="w-8 h-8 mr-2" src="assets/images/index.png">
+                    <span class="text-2xl">Accueil</span>
+            </div>
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='presse'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/presse.png">
+                        <span class="text-2xl">Presse</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='biographie'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/biographie.png">
+                        <span class="text-2xl">Biographie</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='carte'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/carte.png">
+                        <span class="text-2xl">Carte</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='projet'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/projet.png">
+                        <span class="text-2xl">Projet/Book</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='contact'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/contact.png">
+                        <span class="text-2xl">Contact</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='siteamis'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/site.png">
+                        <span class="text-2xl">Site amis</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>

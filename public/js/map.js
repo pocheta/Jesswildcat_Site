@@ -150,15 +150,16 @@ function initMap() {
       }
 
       if (clusterHoverMarker) {
-        var center = ol.extent.getCenter(
-          feature_onHover.getGeometry().getExtent()
-        );
-        map.setView(
-          new ol.View({
-            center: [center[0], center[1]],
-            zoom: 14,
-          })
-        );
+        // var center = ol.extent.getCenter(
+        //   feature_onHover.getGeometry().getExtent()
+        // );
+        // map.setView(
+        //   new ol.View({
+        //     center: [center[0], center[1]],
+        //     zoom: 12,
+        //   })
+        // );
+        map.getView().fit(feature_onHover.getExtent)
       }
     });
   });
@@ -428,4 +429,10 @@ function cancelLieu() {
   images.forEach((box) => {
     box.remove();
   });
+}
+
+function showLegende(){
+  if(document.getElementById("legende").style.display == 'none' || document.getElementById("legende").style.display == '' ) {
+    document.getElementById("legende").style.display = "block";
+  } else if(document.getElementById("legende").style.display == 'block' ) document.getElementById("legende").style.display = "none";
 }

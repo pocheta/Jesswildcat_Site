@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./assets/css/tailwind_compiled.css" />
+    <script src="./js/index.min.js"></script>
+    <script src="./js/flowbite.js"></script>
+
+
+    <title>Antoine POCHET</title>
+</head>
+
+<body class="bg-white">
+    <div class="px-4 pt-16 mx-auto md:px-24 lg:px-8 lg:pt-20 text-center w-full">
+        <div class="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
+            <h2
+                class="max-w-lg font-sans text-5xl font-bold leading-none tracking-tight text-gray-900 md:mx-auto">
+                Contact
+            </h2>
+        </div>
+    </div>
+    <div
+      class="max-w-screen-2xl mt-16 px-8 grid gap-64 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+      <div class="flex flex-col justify-between text-center">
+        <div>
+          <h2 class="text-4xl lg:text-5xl font-bold leading-tight">Parlons de tout !</h2>
+        </div>
+        <div>
+          <img src="assets/images/uploads/1.jpg">
+        </div>
+      </div>
+      <div class="">
+        <div>
+          <span class="uppercase text-sm text-gray-600 font-bold">Email</span>
+          <input class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="email" placeholder="Saisissez votre adresse email">
+        </div>
+        <div class="mt-8">
+          <span class="uppercase text-sm text-gray-600 font-bold">Objet</span>
+          <input class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="text" placeholder="Saisissez votre objet">
+        </div>
+        <div class="mt-8">
+          <span class="uppercase text-sm text-gray-600 font-bold">Message</span>
+          <textarea
+            class="w-full h-32 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline" placeholder="Saisissez votre meessage"></textarea>
+        </div>
+        <div class="mt-8">
+          <button
+            class="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
+            Envoyer votrre message
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end right-2 bottom-0 fixed">
+        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
+            class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
+            type="button">
+            <span class="sr-only">Open menu</span>
+            <img class="w-16 h-16 self-center" src="assets/images/site.png">
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdownAvatar"
+            class="z-10 w-52 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
+            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(3000px, 62px);">
+            <div class="py-1 text-sm text-gray-900 dark:text-white">
+                <button
+                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                    onclick="location.href='home'">
+                    <img class="w-8 h-8 mr-2" src="assets/images/index.png">
+                    <span class="text-2xl">Accueil</span>
+            </div>
+            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='presse'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/presse.png">
+                        <span class="text-2xl">Presse</span>
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='biographie'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/biographie.png">
+                        <span class="text-2xl">Biographie</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='carte'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/carte.png">
+                        <span class="text-2xl">Carte</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='projet'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/projet.png">
+                        <span class="text-2xl">Projet/Book</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='contact'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/contact.png">
+                        <span class="text-2xl">Contact</span>
+                </li>
+                <li>
+                    <button
+                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+                        onclick="location.href='siteamis'">
+                        <img class="w-8 h-8 mr-2" src="assets/images/site.png">
+                        <span class="text-2xl">Site amis</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </body>
+
+</html>

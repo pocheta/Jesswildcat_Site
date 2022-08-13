@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/tailwind_compiled.css" />
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css"
+    type="text/css" />
+  <!-- MAP -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.13.0/build/ol.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/flowbite.js"></script>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/ol-geocoder@latest/dist/ol-geocoder.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/ol-geocoder"></script>
+
+  <!-- FILE -->
+  <script defer src="js/app.js"></script>
+  <!-- ICONE -->
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+  <title>Antoine POCHET</title>
+</head>
+
+<body id="body" onload="initMap()" class="flex">
+  <div id="parent">
+    <div id="map"></div>
+
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content" class="break-normal"></div>
+    </div>
+
+    <div id="addPoint"
+      class="hidden max-w-screen-xl px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+      <div>
+        <div>
+          <span id="textNom" class="uppercase text-sm text-gray-600 font-bold">Nom</span>
+          <input id="nom"
+            class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="text" placeholder="Nom" />
+        </div>
+
+        <div class="mt-8">
+          <span id="textDescription" class="uppercase text-sm text-gray-600 font-bold">Description</span>
+          <textarea id="description"
+            class="w-full h-60 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            placeholder="Description"></textarea>
+        </div>
+
+        <div class="mt-8">
+          <button onclick="addLieu()"
+            class="uppercase text-sm font-bold tracking-wide bg-lime-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-lime-400">
+            Ajouter le lieu
+          </button>
+        </div>
+      </div>
+      <div>
+        <div class="mb-8">
+          <span id="textLieu" class="uppercase text-sm text-gray-600 font-bold">Lieu</span>
+          <input id="lieu"
+            class="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="text" placeholder="Lieu" />
+        </div>
+
+        <div>
+          <span id="textImage" class="uppercase text-sm text-gray-600 font-bold">Image</span>
+          <div class="dropzone mt-2" id="dropzone">
+            <span>Drop the files here...</span>
+          </div>
+          <input type="file" id="addFile" multiple />
+        </div>
+        <div class="img-content"></div>
+
+        <div class="mt-9">
+          <button onclick="cancelLieu()"
+            class="uppercase text-sm font-bold tracking-wide bg-red-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-red-400">
+            Annuler l'ajout du lieu
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="info" class="hidden px-4 pb-16 pt-4 w-2/4 md:px-24 lg:px-8 lg:pb-20 bg-white flex-col">
+      <div class="mx-auto lg:max-w-2xl">
+        <a onclick="closeInfo()">
+          <svg class="right-4 relative" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="6%" height="6%"
+            viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879" xml:space="preserve">
+            <g>
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="#FF4141"
+                d="M61.44,0c33.933,0,61.439,27.507,61.439,61.439 s-27.506,61.439-61.439,61.439C27.507,122.879,0,95.372,0,61.439S27.507,0,61.44,0L61.44,0z M73.451,39.151 c2.75-2.793,7.221-2.805,9.986-0.027c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.076,12.249 c2.729,2.77,2.689,7.257-0.08,10.022c-2.773,2.765-7.23,2.758-9.955-0.013L61.446,71.54L49.428,83.728 c-2.75,2.793-7.22,2.805-9.986,0.027c-2.763-2.776-2.776-7.293-0.027-10.084L51.48,61.434L39.403,49.185 c-2.728-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.953,0.013l11.997,12.165L73.451,39.151L73.451,39.151z" />
+            </g>
+          </svg>
+        </a>
+        <div class="relative w-full transition-shadow duration-300 hover:shadow-xl">
+          <img id="imageInfo" class="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96 mt-10" src=""
+            alt="" />
+        </div>
+      </div>
+      <div class="max-w-xl my-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+        <h2 id="titreInfo"
+          class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+          Titre
+        </h2>
+        <p id="descriptionInfo" class="text-base text-gray-700 md:text-lg">
+          Description
+        </p>
+      </div>
+      <div>
+        <hr class="mt-5 border-gray-300" />
+        <div class="flex items-center space-x-4">
+          <p id="lieuInfo" class="mb-6 text-gray-900">Lieu</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- The Modal -->
+  <div id="imageModal" class="modal">
+    <!-- The Close Button -->
+    <span class="close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01" />
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+  </div>
+
+  <div class="flex justify-end right-2 bottom-0 fixed">
+    <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
+      class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
+      type="button">
+      <span class="sr-only">Open menu</span>
+      <img class="w-16 h-16 self-center" src="assets/images/site.png">
+    </button>
+
+    <!-- Dropdown menu -->
+    <div id="dropdownAvatar"
+      class="z-10 w-52 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
+      style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(3000px, 62px);">
+      <div class="py-1 text-sm text-gray-900 dark:text-white">
+        <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+          onclick="location.href='home'">
+          <img class="w-8 h-8 mr-2" src="assets/images/index.png">
+          <span class="text-2xl">Accueil</span>
+      </div>
+      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='presse'">
+            <img class="w-8 h-8 mr-2" src="assets/images/presse.png">
+            <span class="text-2xl">Presse</span>
+          </button>
+        </li>
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='biographie'">
+            <img class="w-8 h-8 mr-2" src="assets/images/biographie.png">
+            <span class="text-2xl">Biographie</span>
+        </li>
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='carte'">
+            <img class="w-8 h-8 mr-2" src="assets/images/carte.png">
+            <span class="text-2xl">Carte</span>
+        </li>
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='projet'">
+            <img class="w-8 h-8 mr-2" src="assets/images/projet.png">
+            <span class="text-2xl">Projet/Book</span>
+        </li>
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='contact'">
+            <img class="w-8 h-8 mr-2" src="assets/images/contact.png">
+            <span class="text-2xl">Contact</span>
+        </li>
+        <li>
+          <button class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white inline-flex"
+            onclick="location.href='siteamis'">
+            <img class="w-8 h-8 mr-2" src="assets/images/site.png">
+            <span class="text-2xl">Site amis</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex justify-end right-36 bottom-0 fixed">
+    <button onclick="showLegende()"
+      class="flex w-24 h-24 m-6 text-3xl bg-chite rounded-full ring-4 ring-gray-300 dark:focus:ring-gray-600 justify-center"
+      type="button">
+      <span class="sr-only">Open menu</span>
+      <img class="w-16 h-16 self-center" src="assets/images/legende.png">
+    </button>
+  </div>
+
+  <div id="legende" class="sm:text-center bg-legende hidden">
+    <div class="flex justify-center">
+      <div class="absolute left-0 ml-6">
+      <button onclick="showLegende()">
+        <div class="cross"></div>
+      </button>
+      </div>
+      <p class="text-base  text-white md:text-xl">
+        Légende :
+      </p>
+    </div>
+    <div
+      class="mt-4 flex flex-col justify-between p-8 transition-shadow duration-300 bg-white border rounded shadow-sm sm:items-center hover:shadow">
+      <div class="text-center">
+        <ul class="space-y-2 ">
+          <li class="flex items-center justify-center">
+            <div class="w-1/12 mr-6">
+              <img src="assets/images/marker/single_marker.png">
+            </div>
+            <p class="font-medium text-gray-800">Chat</p>
+          </li>
+          <li class="flex items-center justify-center">
+            <div class="w-1/12 mr-6">
+              <img class=" h-full" src="assets/images/marker/multiple_marker.png">
+            </div>
+            <p class="font-medium text-gray-800">Pate de chat</p>
+          </li>
+          <li class="flex items-center justify-center">
+            <div class="mr-2">
+              <svg class="w-4 h-4 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linecap="round"
+                stroke-width="2">
+                <polyline fill="none" stroke="currentColor" points="6,12 10,16 18,8"></polyline>
+                <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
+              </svg>
+            </div>
+            <p class="font-medium text-gray-800">Lille</p>
+          </li>
+          <li class="flex items-center justify-center">
+            <div class="mr-2">
+              <svg class="w-4 h-4 text-deep-purple-accent-400" viewBox="0 0 24 24" stroke-linecap="round"
+                stroke-width="2">
+                <polyline fill="none" stroke="currentColor" points="6,12 10,16 18,8"></polyline>
+                <circle cx="12" cy="12" fill="none" r="11" stroke="currentColor"></circle>
+              </svg>
+            </div>
+            <p class="font-medium text-gray-800">Lille</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

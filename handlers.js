@@ -7,6 +7,41 @@ function home(response, postData) {
   response.end(fs.readFileSync("./public/index.html"));
 }
 
+function presse(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/presse.html"));
+}
+
+function biographie(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/biographie.html"));
+}
+
+function carte(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/carte.html"));
+}
+
+function map(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/map.html"));
+}
+
+function projet(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/projet.html"));
+}
+
+function contact(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/contact.html"));
+}
+
+function siteamis(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/siteamis.html"));
+}
+
 function upload(response, postData) {
   var file = JSON.parse(postData);
   var fileRootName = file.name.split(".").shift();
@@ -84,6 +119,13 @@ function writeJSON(response, postData) {
 
 module.exports = {
   home: home,
+  presse: presse,
+  biographie: biographie,
+  carte: carte,
+  map: map,
+  projet: projet,
+  contact: contact,
+  siteamis: siteamis,
   serveStatic: serveStatic,
   upload: upload,
   readJSON: readJSON,
