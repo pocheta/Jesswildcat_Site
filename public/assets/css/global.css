@@ -31,8 +31,14 @@ body {
 }
 
 #info {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  border-radius : 16px;
+  border : 2px solid #dddddd;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* border-radius : 16px 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(32, 32, 32, 0.3) -10px 10px, rgba(66, 66, 66, 0.2) -15px 15px, rgba(80, 80, 80, 0.1) -20px 20px, rgba(146, 146, 146, 0.05) -25px 25px; */
+
 }
 
 #addPoint {
@@ -196,6 +202,14 @@ input[type="file"] {
   height: 150px;
 }
 
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+}
+
 /* Add Animation - Zoom in the Modal */
 .modal-content, #caption {
   animation-name: zoom;
@@ -312,4 +326,8 @@ input[type="file"] {
   -moz-transform:rotate(-45deg);
   transform:rotate(-45deg);
   right:2px;
+}
+
+.bg-white-opacity-90{
+  background-color:rgba(255, 255, 255, 0.9);
 }
