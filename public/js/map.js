@@ -112,7 +112,6 @@ function startMap() {
       originalFeatures.forEach(function (f, index, array) {
         ol.extent.extend(extent, f.getGeometry().getExtent());
       });
-      console.log(extent);
       map.getView().fit(extent, { size: map.getSize(), duration: 1000, padding: [200, 200, 200, 200] });
 
       clusterHoverMarker = false;
