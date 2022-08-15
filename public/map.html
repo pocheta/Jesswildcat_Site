@@ -5,10 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="./assets/css/tailwind_compiled.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"
+    type="text/css">
 
   <!-- MAP -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -38,39 +39,34 @@
     </div>
 
     <!-- Information de l'oeuvre -->
-    <div id="info" class="hidden w-3/5 bg-white-opacity-90 mx-auto inset-0 my-24">
-      <div class="flex flex-col	">
-        <div class="absolute right-0">
+    <div id="info" class="hidden flex flex-col w-3/5 bg-white-opacity-90 mx-auto inset-0 my-24 ">
+      <div id="modalHeader" class="w-full h-10/100 flex flex-row mt-4 mb-4 ">
+        <div id="modalTitle" class="w-11/12	h-full flex justify-center items-center ml-16">
+          <h2 id="titreInfo"
+            class="font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+            Titre
+          </h2>
+        </div>
+        <div id="modalClose" class="flex justify-center items-center h-full w-1/12">
           <a onclick="closeInfo()">
-            <div class="cross mt-6 mr-6"></div>
+            <div class="cross"></div>
           </a>
         </div>
-        <div class="mx-16 mt-16">
-          <div class="w-fit h-fit transition-shadow duration-300 hover:shadow-xl m-auto">
-            <figure>
-              <img id="imageInfo" class="object-cover w-fit h-fit rounded shadow-lg" style="max-height: 28rem" src=""
-                alt="" />
-              <figcaption id="lieuInfo">Lieu</figcaption>
-            </figure>
-          </div>
-        </div>
       </div>
-      <div class="max-w-xl my-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-        <h2 id="titreInfo"
-          class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-          Titre
-        </h2>
+
+      <div id="modalImage" class="w-full h-4/6 m-auto flex flex-col items-center mb-8">
+        <figure class="h-full transition-shadow duration-300 hover:shadow-xl max-h-fit">
+          <img id="imageInfo" class="object-cover w-fit h-full rounded-t-lg shadow-lg" src="" alt="" />
+          <figcaption id="lieuInfo">Lieu</figcaption>
+        </figure>
+      </div>
+
+      <div id="modalDesc" class="w-full h-1/4 sm:text-center py-4 px-24">
         <p id="descriptionInfo" class="text-base text-gray-700 md:text-lg">
           Description
         </p>
       </div>
-      <!--<div class="mx-16">
-        <hr class="mt-5 border-gray-300" />
-        <div class="flex items-center space-x-4">
-          <p id="lieuInfo" class="mb-6 text-gray-900">Lieu</p>
-        </div>-->
     </div>
-  </div>
   </div>
 
   <!-- Modal de l'image -->

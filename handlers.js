@@ -27,6 +27,11 @@ function map(response, postData) {
   response.end(fs.readFileSync("./public/map.html"));
 }
 
+function map_admin(response, postData) {
+  response.writeHead(200, { "Content-Type": "text/html" });
+  response.end(fs.readFileSync("./public/map_admin.html"));
+}
+
 function projet(response, postData) {
   response.writeHead(200, { "Content-Type": "text/html" });
   response.end(fs.readFileSync("./public/projet.html"));
@@ -123,6 +128,7 @@ module.exports = {
   biographie: biographie,
   carte: carte,
   map: map,
+  map_admin: map_admin,
   projet: projet,
   contact: contact,
   siteamis: siteamis,

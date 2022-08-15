@@ -10,6 +10,7 @@ var routes = {
   '/biographie': handlers.biographie,
   '/carte': handlers.carte,
   '/map': handlers.map,
+  '/map_admin': handlers.map_admin,
   '/projet': handlers.projet,
   '/contact': handlers.contact,
   '/siteamis': handlers.siteamis,

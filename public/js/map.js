@@ -1,11 +1,6 @@
 let map;
-let click = false;
 let hoverMarker = false;
 let clusterHoverMarker = false;
-let clickCoordinateLatitude;
-let clickCoordinateLongitude;
-var fileobj;
-
 
 function startMap() {
   // Initialisation de la map
